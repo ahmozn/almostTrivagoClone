@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "IPzA+0VpPqTAn5GQLw5BlImGJHG52UIzxfmitwLlQazzsuxpHv9qRyR13oY70zeImDiWeoPqdWpDBkatRiZ5vw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ozena\\source\\repos\\vtysProje\\vtysProje.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ozena\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\ozena\\.nuget\\packages\\npgsql\\7.0.1\\npgsql.7.0.1.nupkg.sha512",
+    "C:\\Users\\ozena\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
+    "C:\\Users\\ozena\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
+    "C:\\Users\\ozena\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
