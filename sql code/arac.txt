@@ -1,0 +1,58 @@
+BEGIN;
+
+-- CREATE TABLE "arac" -----------------------------------------
+CREATE TABLE "public"."arac" ( 
+	"sasi_no" SmallInt NOT NULL,
+	"sinif" Character Varying( 13 ) NOT NULL,
+	"sanziman" Character Varying( 10 ) NOT NULL,
+	"kiralama_ucreti" SmallInt NOT NULL,
+	"arac_plaka" Character Varying( 10 ),
+	"r_no_fk" Integer,
+	"ilce" Integer NOT NULL,
+	"arac_konum" Character Varying( 20 ),
+	"il" Integer NOT NULL,
+	PRIMARY KEY ( "sasi_no" ),
+	CONSTRAINT "arac_rNo_fk_key" UNIQUE( "r_no_fk" ) );
+ ;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+BEGIN;
+
+-- CREATE LINK "arac_il_plaka_fkey" ----------------------------
+ALTER TABLE "public"."arac"
+	ADD CONSTRAINT "arac_il_plaka_fkey" FOREIGN KEY ( "il" )
+	REFERENCES "public"."il" ( "plaka" ) MATCH FULL
+	ON DELETE Cascade
+	ON UPDATE Cascade;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+BEGIN;
+
+-- CREATE LINK "arac_ilce_fkey" --------------------------------
+ALTER TABLE "public"."arac"
+	ADD CONSTRAINT "arac_ilce_fkey" FOREIGN KEY ( "ilce" )
+	REFERENCES "public"."ilce" ( "ilce_no" ) MATCH SIMPLE
+	ON DELETE No Action
+	ON UPDATE No Action;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+BEGIN;
+
+-- CREATE LINK "arac_rNo_fk_fkey" ------------------------------
+ALTER TABLE "public"."arac"
+	ADD CONSTRAINT "arac_rNo_fk_fkey" FOREIGN KEY ( "r_no_fk" )
+	REFERENCES "public"."rezervasyon" ( "rezervasyon_no" ) MATCH SIMPLE
+	ON DELETE No Action
+	ON UPDATE No Action;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+INSERT INTO "public"."arac" ( "sasi_no", "sinif", "sanziman", "kiralama_ucreti", "arac_plaka", "r_no_fk", "ilce", "arac_konum", "il") 
+VALUES ( sasi_no, sinif, sanziman, kiralama_ucreti, arac_plaka, r_no_fk, ilce, arac_konum, il );

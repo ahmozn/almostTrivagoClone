@@ -1,0 +1,28 @@
+BEGIN;
+
+-- CREATE TABLE "ilce" -----------------------------------------
+CREATE TABLE "public"."ilce" ( 
+	"ilce_no" Integer DEFAULT nextval('"ilce_ilceNo_seq"'::regclass) NOT NULL,
+	"ilce_adi" Character Varying( 10 ) NOT NULL,
+	"il" Integer NOT NULL,
+	PRIMARY KEY ( "ilce_no" ) );
+ ;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+BEGIN;
+
+-- CREATE LINK "ilce_il_fkey" ----------------------------------
+ALTER TABLE "public"."ilce"
+	ADD CONSTRAINT "ilce_il_fkey" FOREIGN KEY ( "il" )
+	REFERENCES "public"."il" ( "plaka" ) MATCH SIMPLE
+	ON DELETE No Action
+	ON UPDATE No Action;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+
+INSERT INTO "public"."ilce" ( "ilce_no", "ilce_adi", "il") 
+VALUES ( ilce_no:nextval('"ilce_ilceNo_seq"'::regclass), ilce_adi, il );

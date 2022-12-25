@@ -1,0 +1,28 @@
+BEGIN;
+
+-- CREATE TABLE "konaklama" ------------------------------------
+CREATE TABLE "public"."konaklama" ( 
+	"domain" Character Varying( 20 ) NOT NULL,
+	"site_adresi" Character Varying( 20 ) NOT NULL,
+	"site_turu" Character Varying( 10 ) NOT NULL,
+	PRIMARY KEY ( "domain" ) );
+ ;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+BEGIN;
+
+-- CREATE LINK "konaklama_domain_fkey" -------------------------
+ALTER TABLE "public"."konaklama"
+	ADD CONSTRAINT "konaklama_domain_fkey" FOREIGN KEY ( "domain" )
+	REFERENCES "public"."site" ( "domain" ) MATCH SIMPLE
+	ON DELETE Cascade
+	ON UPDATE Cascade;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+
+INSERT INTO "public"."konaklama" ( "domain", "site_adresi", "site_turu") 
+VALUES ( domain, site_adresi, site_turu );

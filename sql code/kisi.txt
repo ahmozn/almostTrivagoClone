@@ -1,0 +1,17 @@
+BEGIN;
+
+-- CREATE TABLE "kisi" -----------------------------------------
+CREATE TABLE "public"."kisi" ( 
+	"kisi_no" Integer DEFAULT nextval('kisino_arttir'::regclass) NOT NULL,
+	"ad" Character Varying( 10 ) NOT NULL,
+	"soyad" Character Varying( 15 ) NOT NULL,
+	"kisi_turu" Character Varying( 10 ) NOT NULL,
+	PRIMARY KEY ( "kisi_no" ) );
+ ;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+
+INSERT INTO "public"."kisi" ( "kisi_no", "ad", "soyad", "kisi_turu") 
+VALUES ( kisi_no:nextval('kisino_arttir'::regclass), ad, soyad, kisi_turu );

@@ -1,0 +1,16 @@
+BEGIN;
+
+-- CREATE TABLE "site" -----------------------------------------
+CREATE TABLE "public"."site" ( 
+	"domain" Character Varying( 20 ) NOT NULL,
+	"site_adresi" Character Varying( 20 ) NOT NULL,
+	"site_turu" Character Varying( 10 ) NOT NULL,
+	PRIMARY KEY ( "domain" ) );
+ ;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+
+INSERT INTO "public"."site" ( "domain", "site_adresi", "site_turu") 
+VALUES ( domain, site_adresi, site_turu );

@@ -1,0 +1,42 @@
+BEGIN;
+
+-- CREATE TABLE "iletisim_bilgileri" ---------------------------
+CREATE TABLE "public"."iletisim_bilgileri" ( 
+	"no" Integer DEFAULT nextval('iletisim_bilgileri_no_seq'::regclass) NOT NULL,
+	"telefon" Character Varying( 11 ) NOT NULL,
+	"adres" Text NOT NULL,
+	"kisi_no" Integer NOT NULL,
+	"il" Integer,
+	PRIMARY KEY ( "no" ),
+	CONSTRAINT "iletisim_bilgileri_telefon_key" UNIQUE( "telefon" ) );
+ ;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+BEGIN;
+
+-- CREATE LINK "il_iletisim_bilgileri_il_fkey" -----------------
+ALTER TABLE "public"."iletisim_bilgileri"
+	ADD CONSTRAINT "il_iletisim_bilgileri_il_fkey" FOREIGN KEY ( "il" )
+	REFERENCES "public"."il" ( "plaka" ) MATCH FULL
+	ON DELETE Cascade
+	ON UPDATE Cascade;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+BEGIN;
+
+-- CREATE LINK "iletisim_bilgileri_kisiNo_fkey" ----------------
+ALTER TABLE "public"."iletisim_bilgileri"
+	ADD CONSTRAINT "iletisim_bilgileri_kisiNo_fkey" FOREIGN KEY ( "kisi_no" )
+	REFERENCES "public"."kisi" ( "kisi_no" ) MATCH SIMPLE
+	ON DELETE Cascade
+	ON UPDATE Cascade;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+INSERT INTO "public"."iletisim_bilgileri" ( "no", "telefon", "adres", "kisi_no", "il") 
+VALUES ( no:nextval('iletisim_bilgileri_no_seq'::regclass), telefon, adres, kisi_no, il );

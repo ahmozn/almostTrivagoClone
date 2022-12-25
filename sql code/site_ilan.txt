@@ -1,0 +1,30 @@
+BEGIN;
+
+-- CREATE TABLE "site_ilan" ------------------------------------
+CREATE TABLE "public"."site_ilan" ( 
+	"s_no" Integer DEFAULT nextval('"site_ilan_sNo_seq"'::regclass) NOT NULL,
+	"ilan_no" Integer NOT NULL,
+	"domain" Character Varying( 20 ) NOT NULL,
+	PRIMARY KEY ( "s_no" ),
+	CONSTRAINT "site_ilan_ilanNo_key" UNIQUE( "ilan_no" ),
+	CONSTRAINT "site_ilan_domain_key" UNIQUE( "domain" ) );
+ ;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+BEGIN;
+
+-- CREATE LINK "site_ilan_domain_fkey" -------------------------
+ALTER TABLE "public"."site_ilan"
+	ADD CONSTRAINT "site_ilan_domain_fkey" FOREIGN KEY ( "domain" )
+	REFERENCES "public"."site" ( "domain" ) MATCH SIMPLE
+	ON DELETE Cascade
+	ON UPDATE Cascade;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+
+INSERT INTO "public"."site_ilan" ( "s_no", "ilan_no", "domain") 
+VALUES ( s_no:nextval('"site_ilan_sNo_seq"'::regclass), ilan_no, domain );

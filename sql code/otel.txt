@@ -1,0 +1,69 @@
+BEGIN;
+
+-- CREATE TABLE "otel" -----------------------------------------
+CREATE TABLE "public"."otel" ( 
+	"otel_no" Integer NOT NULL,
+	"otel_ad" Character Varying( 20 ) NOT NULL,
+	"otel_adres" Text NOT NULL,
+	"yildiz" SmallInt NOT NULL,
+	"r_no_fk" Integer,
+	"ilce" Integer NOT NULL,
+	"il" Integer,
+	"domain" Character Varying( 20 ),
+	PRIMARY KEY ( "otel_no" ),
+	CONSTRAINT "otel_rNo_fk_key" UNIQUE( "r_no_fk" ) );
+ ;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+BEGIN;
+
+-- CREATE LINK "otel_site_domain_fkey" -------------------------
+ALTER TABLE "public"."otel"
+	ADD CONSTRAINT "otel_site_domain_fkey" FOREIGN KEY ( "domain" )
+	REFERENCES "public"."site" ( "domain" ) MATCH FULL
+	ON DELETE Cascade
+	ON UPDATE Cascade;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+BEGIN;
+
+-- CREATE LINK "otel_il_plaka_fkey" ----------------------------
+ALTER TABLE "public"."otel"
+	ADD CONSTRAINT "otel_il_plaka_fkey" FOREIGN KEY ( "il" )
+	REFERENCES "public"."il" ( "plaka" ) MATCH FULL
+	ON DELETE Cascade
+	ON UPDATE Cascade;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+BEGIN;
+
+-- CREATE LINK "otel_ilce_fkey" --------------------------------
+ALTER TABLE "public"."otel"
+	ADD CONSTRAINT "otel_ilce_fkey" FOREIGN KEY ( "ilce" )
+	REFERENCES "public"."ilce" ( "ilce_no" ) MATCH SIMPLE
+	ON DELETE No Action
+	ON UPDATE No Action;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+BEGIN;
+
+-- CREATE LINK "otel_rNo_fk_fkey" ------------------------------
+ALTER TABLE "public"."otel"
+	ADD CONSTRAINT "otel_rNo_fk_fkey" FOREIGN KEY ( "r_no_fk" )
+	REFERENCES "public"."rezervasyon" ( "rezervasyon_no" ) MATCH SIMPLE
+	ON DELETE No Action
+	ON UPDATE No Action;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+INSERT INTO "public"."otel" ( "otel_no", "otel_ad", "otel_adres", "yildiz", "r_no_fk", "ilce", "il", "domain") 
+VALUES ( otel_no, otel_ad, otel_adres, yildiz, r_no_fk, ilce, il, domain );

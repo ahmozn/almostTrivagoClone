@@ -1,0 +1,31 @@
+BEGIN;
+
+-- CREATE TABLE "rezervasyon" ----------------------------------
+CREATE TABLE "public"."rezervasyon" ( 
+	"rezervasyon_no" Integer DEFAULT nextval('"rezervasyon_rezervasyonNo_seq"'::regclass) NOT NULL,
+	"rezervasyon_turu" Character Varying( 5 ) NOT NULL,
+	"rezervasyon_tarihi" Date NOT NULL,
+	"domain" Character Varying( 20 ),
+	"kisi_no" Integer,
+	PRIMARY KEY ( "rezervasyon_no" ),
+	CONSTRAINT "rezervasyon_kisiNo_key" UNIQUE( "kisi_no" ) );
+ ;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+BEGIN;
+
+-- CREATE LINK "rezervasyon_domain_fkey" -----------------------
+ALTER TABLE "public"."rezervasyon"
+	ADD CONSTRAINT "rezervasyon_domain_fkey" FOREIGN KEY ( "domain" )
+	REFERENCES "public"."site" ( "domain" ) MATCH SIMPLE
+	ON DELETE Cascade
+	ON UPDATE Cascade;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+
+INSERT INTO "public"."rezervasyon" ( "rezervasyon_no", "rezervasyon_turu", "rezervasyon_tarihi", "domain", "kisi_no") 
+VALUES ( rezervasyon_no:nextval('"rezervasyon_rezervasyonNo_seq"'::regclass), rezervasyon_turu, rezervasyon_tarihi, domain, kisi_no );

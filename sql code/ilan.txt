@@ -1,0 +1,41 @@
+BEGIN;
+
+-- CREATE TABLE "ilan" -----------------------------------------
+CREATE TABLE "public"."ilan" ( 
+	"ilan_no" Integer DEFAULT nextval('"ilan_ilanNo_seq"'::regclass) NOT NULL,
+	"baslik" Character Varying( 30 ) NOT NULL,
+	"kisi_no" Integer NOT NULL,
+	PRIMARY KEY ( "ilan_no" ),
+	CONSTRAINT "ilan_kisiNo_key" UNIQUE( "kisi_no" ) );
+ ;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+BEGIN;
+
+-- CREATE LINK "site_ilan_kisi_no_fkey" ------------------------
+ALTER TABLE "public"."ilan"
+	ADD CONSTRAINT "site_ilan_kisi_no_fkey" FOREIGN KEY ( "ilan_no" )
+	REFERENCES "public"."site_ilan" ( "ilan_no" ) MATCH FULL
+	ON DELETE Cascade
+	ON UPDATE Cascade;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+BEGIN;
+
+-- CREATE LINK "ilan_kisiNo_fkey" ------------------------------
+ALTER TABLE "public"."ilan"
+	ADD CONSTRAINT "ilan_kisiNo_fkey" FOREIGN KEY ( "kisi_no" )
+	REFERENCES "public"."mal_sahibi" ( "kisi_no" ) MATCH SIMPLE
+	ON DELETE No Action
+	ON UPDATE No Action;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+
+INSERT INTO "public"."ilan" ( "ilan_no", "baslik", "kisi_no") 
+VALUES ( ilan_no:nextval('"ilan_ilanNo_seq"'::regclass), baslik, kisi_no );

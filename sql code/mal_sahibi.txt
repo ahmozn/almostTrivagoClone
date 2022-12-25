@@ -1,0 +1,43 @@
+BEGIN;
+
+-- CREATE TABLE "mal_sahibi" -----------------------------------
+CREATE TABLE "public"."mal_sahibi" ( 
+	"kisi_no" Integer DEFAULT nextval('kisino_arttir'::regclass) NOT NULL,
+	"ad" Character Varying( 10 ) NOT NULL,
+	"soyad" Character Varying( 15 ) NOT NULL,
+	"kisi_turu" Character Varying( 10 ) DEFAULT 'mal sahibi'::character varying NOT NULL,
+	"ilce" Integer NOT NULL,
+	PRIMARY KEY ( "kisi_no" ) );
+ ;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+BEGIN;
+
+-- CREATE LINK "mal_sahibi_ilce_fkey" --------------------------
+ALTER TABLE "public"."mal_sahibi"
+	ADD CONSTRAINT "mal_sahibi_ilce_fkey" FOREIGN KEY ( "ilce" )
+	REFERENCES "public"."ilce" ( "ilce_no" ) MATCH SIMPLE
+	ON DELETE No Action
+	ON UPDATE No Action;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+BEGIN;
+
+-- CREATE LINK "mal_sahibi_kisiNo_fkey" ------------------------
+ALTER TABLE "public"."mal_sahibi"
+	ADD CONSTRAINT "mal_sahibi_kisiNo_fkey" FOREIGN KEY ( "kisi_no" )
+	REFERENCES "public"."kisi" ( "kisi_no" ) MATCH SIMPLE
+	ON DELETE No Action
+	ON UPDATE No Action;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+
+INSERT INTO "public"."mal_sahibi" ( "kisi_no", "ad", "soyad", "kisi_turu", "ilce") 
+VALUES ( kisi_no:nextval('kisino_arttir'::regclass), ad, soyad, kisi_turu:'mal sahibi'::character varying, ilce );
+

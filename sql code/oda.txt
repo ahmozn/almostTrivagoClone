@@ -1,0 +1,31 @@
+BEGIN;
+
+-- CREATE TABLE "oda" ------------------------------------------
+CREATE TABLE "public"."oda" ( 
+	"oda_no" Integer DEFAULT nextval('"oda_odaNo_seq"'::regclass) NOT NULL,
+	"oda_turu" Character Varying( 10 ) NOT NULL,
+	"yatak" Character Varying( 5 ) NOT NULL,
+	"otel_no" Integer NOT NULL,
+	"oda_numara" Integer NOT NULL,
+	"oda_ucret" Integer NOT NULL,
+	PRIMARY KEY ( "oda_no" ) );
+ ;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+BEGIN;
+
+-- CREATE LINK "otel_oda" --------------------------------------
+ALTER TABLE "public"."oda"
+	ADD CONSTRAINT "otel_oda" FOREIGN KEY ( "otel_no" )
+	REFERENCES "public"."otel" ( "otel_no" ) MATCH FULL
+	ON DELETE Cascade
+	ON UPDATE Cascade;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+
+INSERT INTO "public"."oda" ( "oda_no", "oda_turu", "yatak", "otel_no", "oda_numara", "oda_ucret") 
+VALUES ( oda_no:nextval('"oda_odaNo_seq"'::regclass), oda_turu, yatak, otel_no, oda_numara, oda_ucret );

@@ -1,0 +1,28 @@
+BEGIN;
+
+-- CREATE TABLE "ulasim" ---------------------------------------
+CREATE TABLE "public"."ulasim" ( 
+	"domain" Character Varying( 20 ) NOT NULL,
+	"site_adresi" Character Varying( 20 ) NOT NULL,
+	"site_turu" Character Varying( 10 ) NOT NULL,
+	PRIMARY KEY ( "domain" ) );
+ ;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+BEGIN;
+
+-- CREATE LINK "ulasim_domain_fkey" ----------------------------
+ALTER TABLE "public"."ulasim"
+	ADD CONSTRAINT "ulasim_domain_fkey" FOREIGN KEY ( "domain" )
+	REFERENCES "public"."site" ( "domain" ) MATCH SIMPLE
+	ON DELETE Cascade
+	ON UPDATE Cascade;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+
+INSERT INTO "public"."ulasim" ( "domain", "site_adresi", "site_turu") 
+VALUES ( domain, site_adresi, site_turu );

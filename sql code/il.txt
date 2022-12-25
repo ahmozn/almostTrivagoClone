@@ -1,0 +1,15 @@
+BEGIN;
+
+-- CREATE TABLE "il" -------------------------------------------
+CREATE TABLE "public"."il" ( 
+	"plaka" Integer DEFAULT 0 NOT NULL,
+	"il_adi" Character Varying( 20 ) NOT NULL,
+	PRIMARY KEY ( "plaka" ) );
+ ;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+
+INSERT INTO "public"."il" ( "plaka", "il_adi") 
+VALUES ( plaka:0, il_adi );

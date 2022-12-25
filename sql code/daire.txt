@@ -1,0 +1,57 @@
+BEGIN;
+
+-- CREATE TABLE "daire" ----------------------------------------
+CREATE TABLE "public"."daire" ( 
+	"daire_no" Integer DEFAULT nextval('"daire_daireNo_seq"'::regclass) NOT NULL,
+	"oda_sayisi" Character Varying( 5 ) NOT NULL,
+	"lavabo_sayisi" SmallInt NOT NULL,
+	"d_konaklama_ucreti" Integer NOT NULL,
+	"daire_adres" Text NOT NULL,
+	"r_no_fk" Integer,
+	"ilce" Integer NOT NULL,
+	"il" Integer NOT NULL,
+	PRIMARY KEY ( "daire_no" ),
+	CONSTRAINT "daire_rNo_fk_key" UNIQUE( "r_no_fk" ) );
+ ;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+BEGIN;
+
+-- CREATE LINK "daire_il_fkey" ---------------------------------
+ALTER TABLE "public"."daire"
+	ADD CONSTRAINT "daire_il_fkey" FOREIGN KEY ( "il" )
+	REFERENCES "public"."il" ( "plaka" ) MATCH FULL
+	ON DELETE Cascade
+	ON UPDATE Cascade;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+BEGIN;
+
+-- CREATE LINK "daire_ilce_fkey" -------------------------------
+ALTER TABLE "public"."daire"
+	ADD CONSTRAINT "daire_ilce_fkey" FOREIGN KEY ( "ilce" )
+	REFERENCES "public"."ilce" ( "ilce_no" ) MATCH SIMPLE
+	ON DELETE No Action
+	ON UPDATE No Action;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+BEGIN;
+
+-- CREATE LINK "daire_rNo_fk_fkey" -----------------------------
+ALTER TABLE "public"."daire"
+	ADD CONSTRAINT "daire_rNo_fk_fkey" FOREIGN KEY ( "r_no_fk" )
+	REFERENCES "public"."rezervasyon" ( "rezervasyon_no" ) MATCH SIMPLE
+	ON DELETE No Action
+	ON UPDATE No Action;
+-- -------------------------------------------------------------
+
+COMMIT;
+
+INSERT INTO "public"."daire" ( "daire_no", "oda_sayisi", "lavabo_sayisi", "d_konaklama_ucreti", "daire_adres", "r_no_fk", "ilce", "il") 
+VALUES ( daire_no:nextval('"daire_daireNo_seq"'::regclass), oda_sayisi, lavabo_sayisi, d_konaklama_ucreti, daire_adres, r_no_fk, ilce, il );
